@@ -1,0 +1,16 @@
+{
+  "name": "accountgenbot",
+  "version": "0.0.1",
+  "description": "A Discord bot that generates account from a text file!",
+  "main": "jewdev.js",
+  "dependencies": {
+    "discord.js": "^11.4.2",
+    "eslint": "^5.7.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jewdev",
+  "license": "MIT"
+}
