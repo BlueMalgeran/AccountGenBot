@@ -2,26 +2,30 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const cooldown = new Set();
 
-exports.run = async (client, msg, args, config) => {
-    msg.delete();
-
+module.exports.run = async (client, msg, args, config) => {
     if(cooldown.has(msg.author.id)) {
-        msg.reply(`You need to wait ${config.cooldown} minutes to use this command again!`)
-        .then(m => {
-            setTimeout(() => {
-                m.delete();
-            }, 5000);
-        });
+        msg.reply(`You need to wait ${config.COOLDOWN} minutes to use this command again!`)
+            .then((m) => {
+                msg.delete();
 
+                setTimeout(() => {
+                    m.delete();
+                }, 5000);
+            });
     } else {
-        fs.readFile('./accounts/fortnite.txt', function(err, data) {
-            if(err) throw err;
+        fs.readFile('./accounts/fortnite.txt', 'utf8', function(err, data) {
+            if (err) throw err;
+
             data = data + '';
             var lines = data.split('\n');
-            let randomAcc = lines[Math.floor(Math.random() * lines.length)];
+            let account = lines[Math.floor(Math.random() * 1)];
+
+            fs.writeFile('./accounts/fortnite.txt', lines.slice(1).join('\n'), function(err) {
+                if(err) throw err;
+            });
 
             let embed = new Discord.RichEmbed()
-            .addField('Fortnite account', `Random account (email:password): \n**${randomAcc}**`)
+            .addField('Fortnite account', `Random account (email:password): \n**${account}**`)
             .setThumbnail('https://i.imgur.com/09Fxrfw.png')
             .setColor('#FFFFFF')
             .setFooter('Bot made by jewdev')
@@ -29,17 +33,22 @@ exports.run = async (client, msg, args, config) => {
 
             msg.author.send(embed);
 
-            msg.reply('I\'ve sent you a the account! Please check your DM!')
-            .then(m => {
-                setTimeout(() => {
-                    m.delete()
-                }, 5000);
-            });
+            msg.reply('I\'ve sent you the account! Please check your DM!')
+                .then(m => {
+                    setTimeout(() => {
+                        m.delete();
+                    }, 5000);
+                });
 
             cooldown.add(msg.author.id);
             setTimeout(() => {
                 cooldown.delete(msg.author.id);
-            }, config.cooldown * 60 * 1000);
+            }, config.COOLDOWN * 60 * 1000);
         });
     }
+};
+
+module.exports.help = {
+    name: `fortnite`,
+    description: `Sends you a Fortnite account!`
 };

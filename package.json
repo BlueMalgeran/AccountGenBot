@@ -1,16 +1,26 @@
 {
   "name": "accountgenbot",
-  "version": "0.0.1",
-  "description": "A Discord bot that generates account from a text file!",
+  "version": "2.0.0",
+  "description": "A recode of the first version lol",
   "main": "jewdev.js",
-  "dependencies": {
-    "discord.js": "^11.4.2",
-    "eslint": "^5.7.0"
-  },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BlueMalgeran/AccountGenBot.git"
+  },
   "author": "jewdev",
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BlueMalgeran/AccountGenBot/issues"
+  },
+  "homepage": "https://github.com/BlueMalgeran/AccountGenBot#readme",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "discord.js": "^11.4.2"
+  },
+  "devDependencies": {
+    "eslint": "^5.10.0"
+  }
 }
